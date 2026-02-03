@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct MetroProjectApp: App {
 
-
+// TODO: change the app's background color.
     var body: some Scene {
         WindowGroup {
             HomeView()
