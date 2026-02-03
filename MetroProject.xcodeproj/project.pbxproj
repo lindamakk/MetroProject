@@ -10,9 +10,22 @@
 		BFACD23A2F30A0C000464CC0 /* MetroProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetroProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BFACD2682F30A13600464CC0 /* Exceptions for "MetroProject" folder in "MetroProject" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Components/TripStatusCard.swift,
+			);
+			target = BFACD2392F30A0C000464CC0 /* MetroProject */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BFACD23C2F30A0C000464CC0 /* MetroProject */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFACD2682F30A13600464CC0 /* Exceptions for "MetroProject" folder in "MetroProject" target */,
+			);
 			path = MetroProject;
 			sourceTree = "<group>";
 		};
@@ -32,8 +45,8 @@
 		BFACD2312F30A0C000464CC0 = {
 			isa = PBXGroup;
 			children = (
-				BFACD23C2F30A0C000464CC0 /* MetroProject */,
 				BFACD23B2F30A0C000464CC0 /* Products */,
+				BFACD23C2F30A0C000464CC0 /* MetroProject */,
 			);
 			sourceTree = "<group>";
 		};
