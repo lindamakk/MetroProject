@@ -23,7 +23,7 @@ struct StationCard: View {
             .frame(height: 40)
             .overlay(
                    RoundedRectangle(cornerRadius: 10)
-                    .stroke(isSelected ? lineColor : Color.gray, lineWidth: isSelected ? 2 : 1)).padding()
+                    .stroke(isSelected ? lineColor : Color.gray, lineWidth: isSelected ? 2 : 1))
 //
     
     }
