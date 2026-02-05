@@ -43,7 +43,7 @@ struct ActionButton: View {
         .disabled(state != .active)
         .frame(maxWidth: width, minHeight: height)
         .background(finalBackgroundColor)
-        .cornerRadius(16)
+        .cornerRadius(12)
         .padding()
     }
     // MARK: - return text with it is color
@@ -73,6 +73,7 @@ struct ActionButton: View {
         switch state {
         case .active, .disabled:
             labelWithIcon
+                .font(.system(size: 14, weight: .medium, design: .default))
                 .foregroundColor(finalLabelColor)
             //here we ignored the icone
         case .loading:

@@ -42,20 +42,16 @@ struct StartTripCard: View {
                 .font(.system(size: 12, weight: .regular, design: .default))
                 .foregroundColor(subtitleGray)
 
-            Spacer(minLength: 0)
 
             // In-card button
-            Button(action: onAddStops) {
-                HStack(spacing: 8) {
-                    Text("+ Add Your Stops")
-                        .font(.system(size: 16, weight: .semibold, design: .default))
-                        .foregroundColor(.white)
-                }
-                .frame(maxWidth: 225, minHeight: 39)
-                .background(green)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            }
-            .buttonStyle(.plain)
+            ActionButton(
+                label: "Add Your Stops",
+                icon: "plus",
+                width: 228,
+               height: 44
+            )
+            {
+                print()        }
         }
         .frame(width: 334, height: 229)
         .background(
