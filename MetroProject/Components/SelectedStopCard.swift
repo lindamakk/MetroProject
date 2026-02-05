@@ -29,7 +29,7 @@ struct SelectedStopCard: View {
                             .foregroundColor(.black)
                     }
                     .frame(width: 112, height: 48)
-                    .background(Color("GreySubColor"))
+                    .background(Color("GrayColorCard"))
                     .cornerRadius(16)
                     
                     Rectangle()

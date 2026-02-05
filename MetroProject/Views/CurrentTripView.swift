@@ -10,6 +10,6 @@ import SwiftUI
 
 struct CurrentTripView: View {
     var body: some View {
-        Text("CurrentTripView")
+       Text("CurrentTripView")
     }
 }

@@ -17,6 +17,7 @@ struct SearchBar: View {
                     prompt: "Search for a station.."
                 )
             }
+           .frame(height: 120)
         }
 }
 
