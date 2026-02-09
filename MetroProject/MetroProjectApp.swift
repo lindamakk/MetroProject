@@ -20,9 +20,18 @@ struct MetroProjectApp: App {
                     .navigationDestination(for: String.self)
                 {
                     value in
+                    if value == "Home" {
+                        HomeView(path: $path)
+                    }
                         if value == "SelectStops" {
-                            SelectStopsView()
+                            SelectStopsView(path: $path)
                         }
+                    if value == "CurrentTrip" {
+                        CurrentTripView(path: $path)
+                    }
+                    if value == "TripEnded" {
+                        TripEndedView(path: $path)
+                    }
                     }
             }
         }

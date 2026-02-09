@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SelectStopsView: View {
+    @Binding var path: NavigationPath
     
     var body: some View {
         // a list of MetroLine from mv
@@ -55,7 +56,9 @@ struct SelectStopsView: View {
                 }.padding()
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            TripButtomSheet()
+            TripButtomSheet{
+                path.append("CurrentTrip")
+            }
 
         }
         
@@ -68,8 +71,8 @@ struct SelectStopsView: View {
     
 }
 #Preview {
-
-    SelectStopsView()
+    @Previewable @State var path = NavigationPath()
+    SelectStopsView(path: $path)
 
 
 }

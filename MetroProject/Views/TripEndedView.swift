@@ -4,6 +4,7 @@
 import SwiftUI
 
 struct TripEndedView: View {
+    @Binding var path: NavigationPath
     var body: some View {
      
         VStack {
@@ -36,9 +37,10 @@ struct TripEndedView: View {
             
             // done button
             ActionButton(label: "Done") {
-                print("Started")
+                path.append("Home")
             }
             .offset(x: 0, y: 205)
+            
             
         }
     
@@ -49,5 +51,7 @@ struct TripEndedView: View {
 }
 
 #Preview {
-    TripEndedView()
+    @Previewable @State var path = NavigationPath()
+
+    TripEndedView(path: $path)
 }

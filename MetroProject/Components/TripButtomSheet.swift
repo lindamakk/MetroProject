@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct TripButtomSheet: View {
-    
+    var nav: () -> Void
     var body: some View {
        
             
@@ -18,6 +18,7 @@ struct TripButtomSheet: View {
                     .padding()
                 
                 ActionButton(label: "Start Trip") {
+                    nav()
                     print("Started")
                 }
             }
@@ -47,12 +48,12 @@ struct TripButtomSheet: View {
 //
 //    }
 //}
-#Preview {
-
-
-   TripButtomSheet()
-
-}
+//#Preview {
+//
+//
+//   TripButtomSheet()
+//
+//}
 
 //struct ContentTripButtomSheet : View{
 //    var body: some View {
