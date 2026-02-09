@@ -8,38 +8,45 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @Binding var path: NavigationPath
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
 
             Text("Plan Trip")
                 .font(.system(size: 28, weight: .semibold))
-                .foregroundColor(.black)
                 .padding(.top, 24)
                 .padding(.horizontal, 16)
 
-            // الكرت الأول بمحاذاة الوسط
             HStack {
                 Spacer()
-                StartTripCard()
+
+             
+                StartTripCard {
+                    path.append("SelectStops")
+                }
+
                 Spacer()
             }
 
             Text("Last Trips")
-                .font(.system(size: 16, weight: .regular))
-                .foregroundColor(.black)
-                .padding(.top, 8)
+                .font(.system(size: 16))
                 .padding(.horizontal, 16)
 
             HStack {
                 LastTripCard(stationName: "King Saud University")
                 Spacer()
-            }.padding()
+            }
+            .padding()
 
             Spacer(minLength: 0)
         }
     }
 }
 
+
 #Preview {
-    HomeView()
+    @Previewable @State var path = NavigationPath()
+    HomeView(path: $path)
 }

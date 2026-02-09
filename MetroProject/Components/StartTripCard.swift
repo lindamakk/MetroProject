@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StartTripCard: View {
+    var nav: () -> Void
     // Colors from spec
     private let cardBackground = Color.white // #FFFFFF
     private let green = Color(red: 0x38/255, green: 0x66/255, blue: 0x41/255) // #386641
@@ -48,10 +49,13 @@ struct StartTripCard: View {
                 label: "Add Your Stops",
                 icon: "plus",
                 width: 228,
-               height: 44
+               height: 44,
+                
+                
             )
             {
-                print()        }
+                nav()
+            }
         }
         .frame(width: 334, height: 229)
         .background(
@@ -62,6 +66,10 @@ struct StartTripCard: View {
         .multilineTextAlignment(.center)
         .padding(.horizontal, 16)
     }
+    
+    
+    
+//    func nav(){}
 }
 
 #Preview("StartTripCard") {

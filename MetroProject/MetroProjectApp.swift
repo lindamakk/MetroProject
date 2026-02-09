@@ -11,10 +11,23 @@ import SwiftData
 @main
 struct MetroProjectApp: App {
 
-// TODO: change the app's background color.
+    @State var path = NavigationPath()
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack(path: $path) {
+                HomeView(path: $path)
+                    .navigationDestination(for: String.self)
+                {
+                    value in
+                        if value == "SelectStops" {
+                            SelectStopsView()
+                        }
+                    }
+            }
         }
     }
 }
+
+
+
