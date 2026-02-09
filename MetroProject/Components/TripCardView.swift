@@ -70,7 +70,6 @@ struct TripStatusBadge: View {
 
 
 
-
 // MARK: - Preview
 struct TripCardView_Previews: PreviewProvider {
     static var previews: some View {
