@@ -13,19 +13,19 @@ struct SelectStopsView: View {
     
     var body: some View {
         // a list of MetroLine from mv
-        @Previewable @State var metroLine1: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine1: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
         
-        @Previewable @State var metroLine2: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine2: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
-        @Previewable @State var metroLine3: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine3: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
-        @Previewable @State var metroLine4: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine4: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
         
-        @Previewable @State var metroLine5: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine5: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
-        @Previewable @State var metroLine6: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine6: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
         
         VStack(){
 //            SearchBar()

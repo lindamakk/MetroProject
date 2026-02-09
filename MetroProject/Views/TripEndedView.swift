@@ -37,7 +37,7 @@ struct TripEndedView: View {
             
             // done button
             ActionButton(label: "Done") {
-                path.append("Home")
+                path = NavigationPath()
             }
             .offset(x: 0, y: 205)
             

@@ -15,7 +15,7 @@ enum DropDownPickerState {
 
 struct MetroLineDropDown: View {
 
-    @Binding var metroLine: MetroLine
+    @Binding var metroLine: MetroLineTest
     var state: DropDownPickerState = .bottom
 
     @State private var showDropdown = false
@@ -129,7 +129,7 @@ private extension MetroLineDropDown {
 
 
 #Preview {
-    @Previewable @State var metroLine: MetroLine = MetroLine(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+    @Previewable @State var metroLine: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
    
     MetroLineDropDown(
         metroLine: $metroLine
@@ -138,7 +138,7 @@ private extension MetroLineDropDown {
 
 
 
-struct MetroLine: Identifiable, Hashable {
+struct MetroLineTest: Identifiable, Hashable {
     let id = UUID()
     let lineColor: Color
     let lineName: String
