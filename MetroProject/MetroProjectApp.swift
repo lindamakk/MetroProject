@@ -12,8 +12,8 @@ import SwiftData
 struct MetroProjectApp: App {
 
     @State var path = NavigationPath()
-    
-    
+//    @EnvironmentObject var vm: SelectedStopViewModel
+    @StateObject private var vm = SelectedStopViewModel()
     // CREATED ONCE
     let container: ModelContainer
     
@@ -48,6 +48,8 @@ struct MetroProjectApp: App {
                     }
                 }
             }
+            // Inject it into the entire stack
+                        .environmentObject(vm)
             // Data - inject the db into the entire app.
             .modelContainer(container)
             

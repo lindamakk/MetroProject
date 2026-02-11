@@ -12,8 +12,12 @@ struct SelectStopsView: View {
     
     @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
-    @StateObject private var vm = SelectedStopViewModel()
+    @EnvironmentObject var vm: SelectedStopViewModel
+//        @StateObject private var vm = SelectedStopViewModel()
     @Environment(\.modelContext) private var modelContext
+    
+    
+
 
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
@@ -34,6 +38,7 @@ struct SelectStopsView: View {
             }
 
             TripButtomSheet(
+                listIsEmpty: vm.selectedStops.isEmpty,
                 nav: {
                     vm.startTrip(context: context)
                     path.append("CurrentTrip")

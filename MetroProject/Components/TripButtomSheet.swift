@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct TripButtomSheet: View {
+    var listIsEmpty: Bool = true
     var nav: () -> Void
     let stops: [MetroStation]
     let onDelete: (MetroStation) -> Void
@@ -22,7 +23,7 @@ struct TripButtomSheet: View {
                 )
                 .padding(.top)
                 
-                ActionButton(label: "Start Trip") {
+                ActionButton(label: "Start Trip", state:  listIsEmpty ? .disabled : .active) {
                     nav()
                     print("Started")
                 }
