@@ -20,7 +20,7 @@ struct TripButtomSheet: View {
                     stops: stops,
                     onDelete: onDelete
                 )
-                    .padding()
+                .padding(.top)
                 
                 ActionButton(label: "Start Trip") {
                     nav()

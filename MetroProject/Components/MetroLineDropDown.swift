@@ -57,7 +57,6 @@ private extension MetroLineDropDown {
             Text(metroLine.nameEn)
                 .foregroundColor(.black)
                 .offset(x: showDropdown ? -15 : 0)
-
             Spacer()
 
             Image(systemName: "chevron.down")

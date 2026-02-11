@@ -14,7 +14,7 @@ struct MetroProjectApp: App {
     @State var path = NavigationPath()
     
     
-    // Data
+    // CREATED ONCE
     let container: ModelContainer
     
     // Data

@@ -5,15 +5,15 @@
 //  Created by Linda on 02/02/2026.
 //
 
-
-import SwiftUI
-import SwiftData
 import SwiftUI
 import SwiftData
 
 struct SelectStopsView: View {
+    
+    @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
     @StateObject private var vm = SelectedStopViewModel()
+    @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
@@ -26,9 +26,7 @@ struct SelectStopsView: View {
                         MetroLineDropDown(
                             metroLine: line,
                             selectedStations: vm.selectedStops,
-                            onSelectStation: {
-                            
-                                vm.toggle($0) }
+                            onSelectStation: { vm.toggle($0) }
                         )
                     }
                 }
@@ -36,12 +34,9 @@ struct SelectStopsView: View {
             }
 
             TripButtomSheet(
-                
                 nav: {
-                    print("grefwdqefdgh")
-                    print(metroLines)
-//                    print("Navigating to CurrentTrip")
-//                    path.append("CurrentTrip")
+                    vm.startTrip(context: context)
+                    path.append("CurrentTrip")
                 },
                 stops: vm.selectedStops,
                 onDelete: { vm.remove($0) }

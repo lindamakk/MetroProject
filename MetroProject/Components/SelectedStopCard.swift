@@ -28,8 +28,8 @@ struct SelectedStopCard: View {
                             .offset(x: 8)
                     }
                 }
-            }
-            .padding(.horizontal)
+            }.padding(.horizontal)
+            
         }
     }
 }
