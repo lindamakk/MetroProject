@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct SelectStopsView: View {
-    @Binding var path: NavigationPath
+   // @Binding var path: NavigationPath
+    
+    @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
     
     var body: some View {
         // a list of MetroLine from mv
@@ -35,29 +37,31 @@ struct SelectStopsView: View {
 
                 
                 VStack(){
-                    MetroLineDropDown(
-                        metroLine: $metroLine1
-                    )
-                    MetroLineDropDown(
-                        metroLine: $metroLine2
-                    )
-                    MetroLineDropDown(
-                        metroLine: $metroLine3
-                    )
-                    MetroLineDropDown(
-                        metroLine: $metroLine4
-                    )
-                    MetroLineDropDown(
-                        metroLine: $metroLine5
-                    )
-                    MetroLineDropDown(
-                        metroLine: $metroLine6
-                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine1
+//                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine2
+//                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine3
+//                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine4
+//                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine5
+//                    )
+//                    MetroLineDropDown(
+//                        metroLine: $metroLine6
+//                    )
                 }.padding()
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
             TripButtomSheet{
-                path.append("CurrentTrip")
+                
+                tripVeiewModel.startTrip()
+                //path.append("CurrentTrip")
             }
 
         }
@@ -68,11 +72,11 @@ struct SelectStopsView: View {
        // TripButtomSheet()
             //Text("SelectStopsView")
     }
-    
+
 }
 #Preview {
-    @Previewable @State var path = NavigationPath()
-    SelectStopsView(path: $path)
+   // @Previewable @State var path = NavigationPath()
+   // SelectStopsView(path: $path)
 
 
 }
