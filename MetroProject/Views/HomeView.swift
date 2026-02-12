@@ -15,7 +15,9 @@ struct HomeView: View {
     @EnvironmentObject var vm: SelectedStopViewModel
 //        @StateObject private var vm = SelectedStopViewModel()
     
-    @Query(sort: \TripHistory.date)
+//    @Query(sort: \TripHistory.date)
+    @Query(sort: \TripHistory.date, order: .reverse)
+
     private var tripHistory: [TripHistory]
     
     var body: some View {
@@ -46,8 +48,18 @@ struct HomeView: View {
                     NoTripsYet()
                 } else {
                     //                    LastTripCard(history: lastTrip)
+                    // delete redundant from veiw
+                    let uniqueHistory = tripHistory.reduce(into: [TripHistory]()) { result, trip in
+                        // نتحقق إذا كان المسار (المحطات) موجود مسبقاً في النتائج
+                        let alreadyExists = result.contains { existingTrip in
+                            existingTrip.routeStations.map { $0.id } == trip.routeStations.map { $0.id }
+                        }
+                        if !alreadyExists {
+                            result.append(trip)
+                        }
+                    }
                     
-                    ForEach(tripHistory) { trip in
+                    ForEach(uniqueHistory/*, id: \.self*/) { trip in
                         LastTripCard(history: trip){
                             vm.loadTrip(trip.routeStations)
                             path.append("SelectStops")

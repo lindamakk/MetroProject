@@ -23,7 +23,7 @@ class MetroStation {
     var lon: Double
     
     var line: MetroLine?
-    
+    var tripHistories: [TripHistory]? = []
 
     init(id: String, nameEn: String, nameAr: String, lineCode: String, sequence: Int, typeName: String, lat: Double, lon: Double) {
         self.id = id

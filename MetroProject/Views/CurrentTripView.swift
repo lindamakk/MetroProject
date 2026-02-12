@@ -36,6 +36,7 @@ struct CurrentTripView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 253/255, green: 254/255, blue: 255/255))
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
     }
 }
 #Preview {

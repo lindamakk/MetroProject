@@ -12,8 +12,10 @@ import Foundation
 class TripHistory {
     @Attribute(.unique) var id: UUID = UUID()         // auto-generated
     var date: Date = Date()        // auto timestamp
-    var routeStations : [MetroStation]
-//    var status: String 
+//    var routeStations : [MetroStation]
+//    var status: String
+    @Relationship(inverse: \MetroStation.tripHistories)
+        var routeStations: [MetroStation]
     
     init(routeStations: [MetroStation]) {
         self.id = UUID()
