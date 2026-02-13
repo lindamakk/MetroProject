@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SelectStopsView: View {
-   // @Binding var path: NavigationPath
+   @Binding var path: NavigationPath
     
     @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
     
@@ -37,31 +37,31 @@ struct SelectStopsView: View {
 
                 
                 VStack(){
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine1
-//                    )
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine2
-//                    )
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine3
-//                    )
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine4
-//                    )
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine5
-//                    )
-//                    MetroLineDropDown(
-//                        metroLine: $metroLine6
-//                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine1
+                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine2
+                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine3
+                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine4
+                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine5
+                    )
+                    MetroLineDropDown(
+                        metroLine: $metroLine6
+                    )
                 }.padding()
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
             TripButtomSheet{
-                
+                //start trip and navigate
                 tripVeiewModel.startTrip()
-                //path.append("CurrentTrip")
+                path.append("CurrentTrip")
             }
 
         }
@@ -75,8 +75,8 @@ struct SelectStopsView: View {
 
 }
 #Preview {
-   // @Previewable @State var path = NavigationPath()
-   // SelectStopsView(path: $path)
+    @Previewable @State var path = NavigationPath()
+    SelectStopsView(path: $path)
 
 
 }

@@ -11,7 +11,7 @@ import Combine
 final class SharedData: ObservableObject {
     static let shared = SharedData()
     
-    @Published var items: [MetroStationTEST] = [ station1]
+    @Published var items: [MetroStationTEST] = [station1]
    // @Published var selectedStop:[MetroStation]=[]
     private init() {}
 }

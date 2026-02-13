@@ -31,32 +31,32 @@ struct MetroProjectApp: App {
         WindowGroup {
             
             
-            SelectStopsView()
-//            NavigationStack(path: $path) {
-//                HomeView(path: $path)
-//                    .navigationDestination(for: String.self)
-//                {
-//                    value in
-////                    if value == "Home" {
-////                        HomeView(path: $path)
-////                    }
-//                         if value == "SelectStops" {
-//                            SelectStopsView(path: $path)
-//                        }
-//                    else if value == "CurrentTrip" {
-//                        CurrentTripView(path: $path)
+            //SelectStopsView()
+            NavigationStack(path: $path) {
+                HomeView(path: $path)
+                    .navigationDestination(for: String.self)
+                {
+                    value in
+//                    if value == "Home" {
+//                        HomeView(path: $path)
 //                    }
-//                    else if value == "TripEnded" {
-//                        TripEndedView(path: $path)
-//                    }
-//                }
-//            }
-//            // Data - inject the db into the entire app.
-//            .modelContainer(container)
-//            
-//            .onAppear {
-//                        DataService.seedData(context: container.mainContext)
-//                    }
+                         if value == "SelectStops" {
+                            SelectStopsView(path: $path)
+                        }
+                    else if value == "CurrentTrip" {
+                        CurrentTripView(path: $path)
+                    }
+                    else if value == "TripEnded" {
+                        TripEndedView(path: $path)
+                    }
+                }
+            }
+            // Data - inject the db into the entire app.
+            .modelContainer(container)
+            
+            .onAppear {
+                        DataService.seedData(context: container.mainContext)
+                    }
         }
     }
 }
