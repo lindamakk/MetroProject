@@ -10,7 +10,6 @@ import Combine
 import CoreLocation
 import UserNotifications
 
-
 class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
     // MARK: - Published Properties
@@ -34,15 +33,12 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         let remaining = sharedData.items.count - currentStationIndex
         return max(0, remaining) // Ensure we never return negative
     }
-
-
-    
-    
-    
+    var destinationLineName: String {
+            destinationStation?.metroline ?? "Unknown"
+        }
     // MARK: - Private Properties
     private let sharedData = SharedData.shared
     private let locationManager = CLLocationManager()
-    
     // MARK: - Read-only Proxies
     var itemsCount: Int { sharedData.items.count }
     
@@ -51,21 +47,18 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     private let notifyDistance: CLLocationDistance = 20
     
     
-
-    
+  
     // MARK: - Init
     override init() {
         super.init()
         setupPassedMap()
         UNUserNotificationCenter.current().delegate = self
-        
         print("🟢 ViewModel initialized")
         print("🟢 Total stations: \(sharedData.items.count)")
         for (index, station) in sharedData.items.enumerated() {
             print("   Station \(index): \(station.name) at (\(station.latitude), \(station.longitude))")
         }
     }
-    
     // MARK: - Public Methods
     func startTrip() {
         print("\n🚀 START TRIP CALLED")

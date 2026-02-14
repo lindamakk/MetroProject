@@ -12,9 +12,6 @@ struct CurrentTripView: View {
     @State private var showEndTripAlert = false
     
     
-    
-    let currentUserDestination = userDestination(stationName: "King Saud University", lineName: "Red")
-    
     var body: some View {
         VStack(spacing: 60) {
             Spacer().frame(height: 40)
@@ -22,7 +19,8 @@ struct CurrentTripView: View {
             FinalDestinationGroup(
                 userDestination: userDestination(
                     stationName: viewModel.destinationName,
-                    lineName: "Red" // You might want to add line tracking to ViewModel
+                    lineName: viewModel.destinationLineName,
+                    // You might want to add line tracking to ViewModel
                 )
             )
             

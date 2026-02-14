@@ -15,7 +15,7 @@ struct SelectStopsView: View {
     
     var body: some View {
         // a list of MetroLine from mv
-        @Previewable @State var metroLine1: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
+        @Previewable @State var metroLine1: MetroLineTest = MetroLineTest(lineColor: .blueLine, lineName: "Blue Line", stops: [  Station(lineColor: .blueLine, stopName: "Princess Noura University 1"),  Station(lineColor: .blueLine, stopName: "Princess Noura University 1"),  Station(lineColor: .blueLine, stopName: "Princess Noura University 1")])
         
         
         @Previewable @State var metroLine2: MetroLineTest = MetroLineTest(lineColor: .red, lineName: "Red Line", stops: [  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1"),  Station(lineColor: .red, stopName: "Princess Noura University 1")])
