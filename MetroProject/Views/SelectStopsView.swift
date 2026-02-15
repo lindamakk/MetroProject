@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct SelectStopsView: View {
-    
+    @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
     @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
     @EnvironmentObject var vm: SelectedStopViewModel
+    
+   // @EnvironmentObject var vmc: CurrentTripViewModel
 //        @StateObject private var vm = SelectedStopViewModel()
     @Environment(\.modelContext) private var modelContext
     
@@ -39,12 +41,17 @@ struct SelectStopsView: View {
 
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
+                
                 nav: {
+                    
                     vm.startTrip(context: context)
+                    tripVeiewModel.startTrip()
                     path.append("CurrentTrip")
+                    
                 },
                 stops: vm.selectedStops,
                 onDelete: { vm.remove($0) }
+               
             )
         }
         .ignoresSafeArea(edges: .bottom)
