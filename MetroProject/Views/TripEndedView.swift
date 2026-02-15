@@ -46,7 +46,7 @@ struct TripEndedView: View {
     
         
         
-      
+        .navigationBarBackButtonHidden(true)
     }
 }
 

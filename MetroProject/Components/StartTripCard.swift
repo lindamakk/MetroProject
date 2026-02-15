@@ -56,15 +56,15 @@ struct StartTripCard: View {
             {
                 nav()
             }
-        }
-        .frame(width: 334, height: 229)
+        }.frame(maxWidth: .infinity)
+        .frame( height: 229)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(cardBackground)
                 .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
         )
         .multilineTextAlignment(.center)
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 10)
     }
     
     

@@ -11,6 +11,8 @@ import SwiftUI
 @MainActor
 class DataService {
     
+    
+    
     static func seedData(context: ModelContext) {
         // Check if data is already loaded.
         let descriptor = FetchDescriptor<MetroStation>()
@@ -57,7 +59,7 @@ class DataService {
                     id: raw.metrostationcode,
                     nameEn: raw.metrostationname,
                     nameAr: raw.metrostationnamear ?? "",
-                    lineCode: raw.metroline,
+                    lineName: raw.metrolinename,
                     sequence: raw.stationseq,
                     typeName: raw.mstationtypename,
                     lat: raw.geo_point_2d.lat,
@@ -79,4 +81,40 @@ class DataService {
             print("❌ Failed to seed data: \(error.localizedDescription)")
         }
     }
+    
+    static func addToHistory(context: ModelContext, history: [MetroStation]){
+        
+        
+        let historyItem = TripHistory(routeStations: history)
+        context.insert(historyItem)
+        // Persist changes (optional; SwiftData may autosave, but explicit save is fine)
+        try? context.save()
+        
+        print(fetchHistory(context: context))
+        
+    }
+    
+    
+    // In DataService.swift
+
+    static func fetchHistory(context: ModelContext) -> [TripHistory] {
+        do {
+            // 1. Describe EXACTLY what you want: "Give me all TripHistory objects"
+            // Sort by date (newest first)
+            let descriptor = FetchDescriptor<TripHistory>(
+                sortBy: [SortDescriptor(\.date, order: .reverse)]
+            )
+            
+            // 2. Fetch them
+            let history = try context.fetch(descriptor)
+            return history
+            
+        } catch {
+            print("❌ Failed to fetch history: \(error)")
+            return []
+        }
+    }
+    
+    
+   
 }

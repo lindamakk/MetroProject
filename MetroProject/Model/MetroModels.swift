@@ -15,7 +15,7 @@ class MetroStation {
     
     var nameEn: String
     var nameAr: String
-    var lineCode: String
+    var lineName: String
     var sequence: Int
     var typeName: String
     
@@ -23,13 +23,13 @@ class MetroStation {
     var lon: Double
     
     var line: MetroLine?
-    
+    var tripHistories: [TripHistory]? = []
 
-    init(id: String, nameEn: String, nameAr: String, lineCode: String, sequence: Int, typeName: String, lat: Double, lon: Double) {
+    init(id: String, nameEn: String, nameAr: String, lineName: String, sequence: Int, typeName: String, lat: Double, lon: Double) {
         self.id = id
         self.nameEn = nameEn
         self.nameAr = nameAr
-        self.lineCode = lineCode
+        self.lineName = lineName
         self.sequence = sequence
         self.typeName = typeName
         self.lat = lat
