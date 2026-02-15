@@ -1,30 +1,44 @@
-//
-//  SelectedStopViewModel.swift
-//  MetroProject
-//
-//  Created by nouransalah on 16/08/1447 AH.
-//
-
 import Combine
+import SwiftData
+import Foundation
+
 
 class SelectedStopViewModel: ObservableObject {
-    @Published var selectedStopObjectarr: [MetroObject] = [obj1, obj4]
-
-    //need binding so i can delete
-    func removeCard(at index: Int) {
-        selectedStopObjectarr.remove(at: index)
+    @Published var selectedStops: [MetroStation] = []
+    private let sharedData = SharedData.shared
+    
+    func reset() {
+            self.selectedStops = []
+        }
+    
+    func loadTrip(_ stations: [MetroStation]) {
+//            self.selectedStops = stations
+        // for the UI to use, independent of the History object.
+            self.selectedStops = Array(stations)
+        }
+    
+    // Toggle selection: add/remove station
+    func toggle(_ station: MetroStation) {
+        
+        if let index = selectedStops.firstIndex(where: { $0.id == station.id }) {
+            selectedStops.remove(at: index)
+        } else {
+            selectedStops.append(station)
+        }
     }
-}
-//init(selectedStopObject: [MetroObject] = []) {
-//    self.selectedStopObject = selectedStopObject
-//}
-
-// MARK: - Model
-struct MetroObject: Codable, Identifiable {
-    var id: String
-    let metroLineColor: String
-    let stopstationName: String
-}
-// MARK: - Sample Data
-let obj1 = MetroObject(id: "1z1", metroLineColor: "BlueLine", stopstationName: "STC b")
-let obj4 = MetroObject(id: "1z2", metroLineColor: "RedLine", stopstationName: "STC")
+    
+    // Remove a station
+    func remove(_ station: MetroStation) {
+        if let index = selectedStops.firstIndex(where: { $0.id == station.id }) {
+            selectedStops.remove(at: index)
+        }
+    }
+    
+    func startTrip(context: ModelContext) {
+        // save route in history
+//        let stationsToSave = Array(selectedStops) // Copy the current selection
+        DataService.addToHistory(context: context, history: selectedStops)
+        
+        // pass the stops list to SharedData if neede
+        sharedData.items = selectedStops
+    }}

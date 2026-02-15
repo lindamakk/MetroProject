@@ -6,47 +6,78 @@
 //
 
 import SwiftUI
+import _SwiftData_SwiftUI
+
 
 struct HomeView: View {
     
     @Binding var path: NavigationPath
+    @EnvironmentObject var vm: SelectedStopViewModel
+//        @StateObject private var vm = SelectedStopViewModel()
+    
+//    @Query(sort: \TripHistory.date)
+    @Query(sort: \TripHistory.date, order: .reverse)
+
+    private var tripHistory: [TripHistory]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-
+        ScrollView{ VStack(alignment: .leading, spacing: 24) {
+            
             Text("Plan Trip")
                 .font(.system(size: 28, weight: .semibold))
                 .padding(.top, 24)
                 .padding(.horizontal, 16)
-
+            
             HStack {
                 Spacer()
-
-             
                 StartTripCard {
+                    vm.reset()
                     path.append("SelectStops")
                 }
-
+                
                 Spacer()
             }
-
+            
             Text("Last Trips")
                 .font(.system(size: 16))
                 .padding(.horizontal, 16)
-
-            HStack {
-                LastTripCard(stationName: "King Saud University")
+            
+            VStack {
+                
+                if tripHistory.isEmpty {
+                    NoTripsYet()
+                } else {
+                    //                    LastTripCard(history: lastTrip)
+                    // delete redundant from veiw
+                    let uniqueHistory = tripHistory.reduce(into: [TripHistory]()) { result, trip in
+                        // نتحقق إذا كان المسار (المحطات) موجود مسبقاً في النتائج
+                        let alreadyExists = result.contains { existingTrip in
+                            existingTrip.routeStations.map { $0.id } == trip.routeStations.map { $0.id }
+                        }
+                        if !alreadyExists {
+                            result.append(trip)
+                        }
+                    }
+                    
+                    ForEach(uniqueHistory/*, id: \.self*/) { trip in
+                        LastTripCard(history: trip){
+                            vm.loadTrip(trip.routeStations)
+                            path.append("SelectStops")
+                        }
+                        
+                    }
+                }
+                
                 Spacer()
-            }
-            .padding()
-
+            }  .padding(.horizontal, 16)
+            
             Spacer(minLength: 0)
-        }
+        }}
     }
 }
 
 
-#Preview {
-    @Previewable @State var path = NavigationPath()
-    HomeView(path: $path)
-}
+//#Preview {
+//    @Previewable @State var path = NavigationPath()
+//    HomeView(path: $path)
+//}

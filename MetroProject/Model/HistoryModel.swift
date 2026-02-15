@@ -10,20 +10,17 @@ import Foundation
 
 @Model
 class TripHistory {
-    var id: UUID
-    var date: Date
+    @Attribute(.unique) var id: UUID = UUID()         // auto-generated
+    var date: Date = Date()        // auto timestamp
+//    var routeStations : [MetroStation]
+//    var status: String
+    @Relationship(inverse: \MetroStation.tripHistories)
+        var routeStations: [MetroStation]
     
-    var startStation: MetroStation
-    var endStation: MetroStation
-    
-    // "Completed", "Cancelled"
-    var status: String 
-    
-    init(startStation: MetroStation, endStation: MetroStation, status: String = "Completed") {
+    init(routeStations: [MetroStation]) {
         self.id = UUID()
         self.date = Date()
-        self.startStation = startStation
-        self.endStation = endStation
-        self.status = status
+        self.routeStations = routeStations
+//        self.status = status
     }
 }

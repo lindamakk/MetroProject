@@ -9,15 +9,21 @@ import SwiftUI
 
 
 struct TripButtomSheet: View {
+    var listIsEmpty: Bool = true
     var nav: () -> Void
+    let stops: [MetroStation]
+    let onDelete: (MetroStation) -> Void
     var body: some View {
        
             
             VStack(alignment: .leading, spacing: 4) {
-                SelectedStopCard()
-                    .padding()
+                SelectedStopCard(
+                    stops: stops,
+                    onDelete: onDelete
+                )
+                .padding(.top)
                 
-                ActionButton(label: "Start Trip") {
+                ActionButton(label: "Start Trip", state:  listIsEmpty ? .disabled : .active) {
                     nav()
                     print("Started")
                 }
@@ -33,41 +39,3 @@ struct TripButtomSheet: View {
 
     }
 }
-
-//struct TripButtomSheet: View {
-//    @State private var isPresented: Bool = true  // Shows immediately
-//
-//    var body: some View {
-//        Color.clear  // Invisible view
-//            .sheet(isPresented: $isPresented) {
-//                ContentTripButtomSheet()
-//                    .presentationDetents([.medium, .height(208)])
-//                    .presentationDragIndicator(.visible)
-//                    //.interactiveDismissDisabled(true)
-//            }
-//
-//    }
-//}
-//#Preview {
-//
-//
-//   TripButtomSheet()
-//
-//}
-
-//struct ContentTripButtomSheet : View{
-//    var body: some View {
-//        
-//        VStack(alignment: .leading ){
-//            SelectedStopCard()
-//                .padding()
-//            // 1 Default green button
-//            ActionButton(label: "Start Trip") {
-//                print("Started")
-//            }
-//            
-//        }//v
-//        
-//       // .frame(maxHeight: .infinity, alignment: .top)
-//    }
-//}

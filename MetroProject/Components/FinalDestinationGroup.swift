@@ -12,7 +12,7 @@ struct FinalDestinationGroup: View {
                 .font(Font.system(size: 16, weight: .medium, design: .default))
             Text("\(userDestination.stationName)")
                 .font(Font.system(size: 24, weight: .medium, design: .default))
-            Text("\(userDestination.lineName) Line")
+            Text("\(userDestination.lineName.capitalized)")
                 .font(Font.system(size: 12, weight: .medium, design: .default))
                 .foregroundColor(Color("GreenPrimaryColor"))
         }

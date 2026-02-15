@@ -8,21 +8,24 @@
 import SwiftUI
 
 struct LastTripCard: View {
-    let stationName: String
+    let history: TripHistory
+    
+    var nav: () -> Void
+//    let stationName: String
 
-    var metroColor: Color = .red
+//    var metroColor: Color = .red
 
     var body: some View {
         Button(action: {
-            // لسا ما تشتغل
+            nav()
         }) {
             HStack(spacing: 12) {
                 RoundedRectangle(cornerRadius: 3.5, style: .continuous)
-                    .fill(metroColor)
+                    .fill(getMetroColor (lineColor: history.routeStations.last!.line!.nameEn))
                     .frame(width: 7, height: 45)
                     .accessibilityHidden(true)
 
-                Text(stationName)
+                Text(history.routeStations.last!.nameEn)
                     .font(.system(size: 16, weight: .regular, design: .default)) // SF Pro Text 16
                     .lineLimit(1)
                     .truncationMode(.tail)
@@ -42,9 +45,9 @@ struct LastTripCard: View {
     }
 }
 
-#Preview("LastTripCard") {
-    VStack(spacing: 20) {
-        LastTripCard(stationName: "King Saud University")
-    }
-    .padding()
-}
+//#Preview("LastTripCard") {
+//    VStack(spacing: 20) {
+//        LastTripCard(stationName: "King Saud University")
+//    }
+//    .padding()
+//}
