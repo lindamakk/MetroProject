@@ -23,10 +23,27 @@ struct HomeView: View {
     var body: some View {
         ScrollView{ VStack(alignment: .leading, spacing: 24) {
             
-            Text("Plan Trip")
-                .font(.system(size: 28, weight: .semibold))
-                .padding(.top, 24)
-                .padding(.horizontal, 16)
+            HStack(alignment: .center) {
+                Text("Plan Trip")
+                    .font(.system(size: 28, weight: .semibold))
+//
+//                Spacer()
+//
+//                Button(action: {
+//                    print("change lang")
+//                }) {
+//                    Text("En")
+//                        .padding(.horizontal, 8)
+//                        .padding(.vertical, 4)
+//
+//                }
+//                .foregroundColor(.gray)
+//                .background(.grayColorCard)
+//                .cornerRadius(10)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 24) // ← move it here
+
             
             HStack {
                 Spacer()
