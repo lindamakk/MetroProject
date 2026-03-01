@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 struct SelectStopsView: View {
     @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
@@ -18,8 +19,7 @@ struct SelectStopsView: View {
 //        @StateObject private var vm = SelectedStopViewModel()
     @Environment(\.modelContext) private var modelContext
     
-    
-
+    let locationTip = LocationPermissionTip()
 
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
@@ -41,18 +41,16 @@ struct SelectStopsView: View {
 
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
-                
                 nav: {
-                    
                     vm.startTrip(context: context)
                     tripVeiewModel.startTrip()
                     path.append("CurrentTrip")
-                    
                 },
                 stops: vm.selectedStops,
                 onDelete: { vm.remove($0) }
-               
             )
+            .popoverTip(locationTip, arrowEdge: .bottom)
+            
         }
         .ignoresSafeArea(edges: .bottom)
     }
