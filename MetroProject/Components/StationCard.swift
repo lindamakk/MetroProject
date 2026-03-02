@@ -18,9 +18,11 @@ struct StationCard: View {
         
         VStack(alignment: .leading) {
             Text(stopName).font(Font.system(size: 14, weight: .medium, design: .default))
+                .frame(maxWidth: .infinity,  alignment: .leading)
         }.padding()
-            .frame(maxWidth: .infinity,  alignment: .leading)
+          //  .frame(maxWidth: .infinity,  alignment: .leading)
             .frame(height: 40)
+            .contentShape(Rectangle())
             .overlay(
                    RoundedRectangle(cornerRadius: 10)
                     .stroke(isSelected ? lineColor : Color.gray, lineWidth: isSelected ? 2 : 1))

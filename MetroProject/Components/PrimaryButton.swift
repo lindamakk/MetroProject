@@ -39,9 +39,11 @@ struct ActionButton: View {
             }
         } label: {
             content
+                .frame(maxWidth: width, minHeight: height)
+
         }
         .disabled(state != .active)
-        .frame(maxWidth: width, minHeight: height)
+        //.frame(maxWidth: width, minHeight: height)
         .background(finalBackgroundColor)
         .cornerRadius(12)
         .padding()
