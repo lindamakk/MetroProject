@@ -5,6 +5,8 @@ import Foundation
 
 class SelectedStopViewModel: ObservableObject {
     @Published var selectedStops: [MetroStation] = []
+    //@StateObject  private  var tripVeiewModel = CurrentTripViewModel()
+
     private let sharedData = SharedData.shared
     
     func reset() {
@@ -41,4 +43,5 @@ class SelectedStopViewModel: ObservableObject {
         
         // pass the stops list to SharedData if neede
         sharedData.items = selectedStops
+        //vmc.startTrip()
     }}
