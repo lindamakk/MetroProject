@@ -20,22 +20,34 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     // MARK: - computed properties i need to pass it to view
 
     //The final destination station (last station in the route)
-    var destinationStation: MetroStation? {
-        guard !sharedData.items.isEmpty else { return nil }
-        return sharedData.items.last
+//    var destinationStation: MetroStation? {
+//        guard !sharedData.items.isEmpty else { return nil }
+//        return sharedData.items.last
+//    }
+
+    var nextStation: MetroStation? {
+        let nextIndex = currentStationIndex
+        guard nextIndex < sharedData.items.count else { return nil }
+        return sharedData.items[nextIndex]
+    }
+    var nextStationName: String {
+        return nextStation?.nameEn ?? "Unknown Destination"
+    }
+    var nextStationLine: String {
+        return nextStation?.lineName ?? "Unknown Destination"
     }
     //Destination station name for display
-    var destinationName: String {
-        destinationStation?.nameEn ?? "Unknown Destination"
-    }
+//    var destinationName: String {
+//        destinationStation?.nameEn ?? "Unknown Destination"
+//    }
     //Number of stations remaining (not yet passed)
     var stationsRemaining: Int {
         let remaining = sharedData.items.count - currentStationIndex
         return max(0, remaining) // Ensure we never return negative
     }
-    var destinationLineName: String {
-        destinationStation?.lineName ?? "Unknown"
-        }
+//    var destinationLineName: String {
+//        destinationStation?.lineName ?? "Unknown"
+//        }
     // MARK: - Private Properties
     private let sharedData = SharedData.shared
     private let locationManager = CLLocationManager()
@@ -69,6 +81,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         
         print("✅ Trip started - tracking is active")
         print("🎯 Currently tracking station \(currentStationIndex): \(sharedData.items[currentStationIndex].nameEn)")
+        
     }
     
     func stopTrip() {
@@ -143,8 +156,13 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         print("\n🔄 HANDLING USER LOCATION")
         
         if hasReachedFinalDestination() {
-            print("🏁 Reached final destination!")
-            hasReachedDestination = true
+            DispatchQueue.main.async {
+                self.hasReachedDestination = true // 👈
+                print("🏁 Reached final destination!")
+
+            }
+            //print("🏁 Reached final destination!")
+            //hasReachedDestination = true
             return
         }
         
@@ -194,23 +212,41 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     }
     
     private func markStationAsPassed(_ station: MetroStation) {
-        mapIsPassed[station] = true
+        //mapIsPassed[station] = true
+        DispatchQueue.main.async {
+            self.mapIsPassed[station] = true // 👈
+        }
         print("✅ Marked station as PASSED: \(station.nameEn)")
     }
-    
     private func moveToNextStation() {
         let previousIndex = currentStationIndex
-        currentStationIndex += 1
-        
-        print("➡️ Moving from station \(previousIndex) to \(currentStationIndex)")
-        
-        if hasReachedFinalDestination() {
-            print("🏁 This was the final station!")
-            hasReachedDestination = true
-        } else {
-            print("🎯 Next target: \(sharedData.items[currentStationIndex].nameEn)")
+        //so ui render
+        DispatchQueue.main.async {
+            self.currentStationIndex += 1
+            
+            print("➡️ Moving from station \(previousIndex) to \(self.currentStationIndex)")
+            
+            if self.hasReachedFinalDestination() {
+                print("🏁 This was the final station!")
+                self.hasReachedDestination = true
+            } else {
+                print("🎯 Next target: \(self.sharedData.items[self.currentStationIndex].nameEn)")
+            }
         }
     }
+//    private func moveToNextStation() {
+//        let previousIndex = currentStationIndex
+//        currentStationIndex += 1
+//        
+//        print("➡️ Moving from station \(previousIndex) to \(currentStationIndex)")
+//        
+//        if hasReachedFinalDestination() {
+//            print("🏁 This was the final station!")
+//            hasReachedDestination = true
+//        } else {
+//            print("🎯 Next target: \(sharedData.items[currentStationIndex].nameEn)")
+//        }
+//    }
     
     // MARK: - Notifications
     private func notifyUser(for station: MetroStation) {

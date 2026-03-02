@@ -8,7 +8,7 @@ struct FinalDestinationGroup: View {
     
     var body: some View {
         VStack(spacing: 8){
-            Text("Your Final Destination")
+            Text("Your next stop is")
                 .font(Font.system(size: 16, weight: .medium, design: .default))
             Text("\(userDestination.stationName)")
                 .font(Font.system(size: 24, weight: .medium, design: .default))
