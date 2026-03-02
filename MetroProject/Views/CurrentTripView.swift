@@ -18,8 +18,8 @@ struct CurrentTripView: View {
             // Pass the destination from ViewModel
             FinalDestinationGroup(
                 userDestination: userDestination(
-                    stationName: viewModel.destinationName,
-                    lineName: viewModel.destinationLineName,
+                    stationName: viewModel.nextStationName,
+                    lineName: viewModel.nextStationLine,
                     // You might want to add line tracking to ViewModel
                 )
             )
