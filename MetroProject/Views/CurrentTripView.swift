@@ -13,7 +13,7 @@ struct CurrentTripView: View {
     
     
     var body: some View {
-        VStack(spacing: 60) {
+        VStack(spacing: 24) {
             Spacer().frame(height: 40)
             // Pass the destination from ViewModel
             FinalDestinationGroup(
@@ -29,13 +29,10 @@ struct CurrentTripView: View {
                 stopsLeft: viewModel.stationsRemaining,
                 status: .inProgress
             )
-            
-            
-            
-//            FinalDestinationGroup(userDestination: currentUserDestination)
-//            TripCardView(stopsLeft: 2, status: .inProgress)
-            
-            //TripCardView(stopsLeft: 1, status: .interrupted)
+            Spacer()
+            StopsProgressBar(viewModel: viewModel)
+
+
             
             Spacer()
             
@@ -51,10 +48,10 @@ struct CurrentTripView: View {
             }//button
             
         }//v
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        //.padding()
+        //.frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 253/255, green: 254/255, blue: 255/255))
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
         // TODO: we need to change alert to
         .alert("End Trip?", isPresented: $showEndTripAlert) {
             Button("Cancel", role: .cancel) { }
