@@ -24,6 +24,8 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
 //        guard !sharedData.items.isEmpty else { return nil }
 //        return sharedData.items.last
 //    }
+    
+    
 
     var nextStation: MetroStation? {
         let nextIndex = currentStationIndex
@@ -71,6 +73,8 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
             print("   Station \(index): \(station.nameEn) at (\(station.lat), \(station.lon))")
         }
     }
+    
+    
     // MARK: - Public Methods
     func startTrip() {
         print("\n🚀 START TRIP CALLED")

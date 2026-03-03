@@ -10,13 +10,11 @@ import SwiftData
 import TipKit
 
 struct SelectStopsView: View {
-    @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
+
     @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
     @EnvironmentObject var vm: SelectedStopViewModel
     
-   // @EnvironmentObject var vmc: CurrentTripViewModel
-//        @StateObject private var vm = SelectedStopViewModel()
     @Environment(\.modelContext) private var modelContext
     
     let locationTip = LocationPermissionTip()
@@ -60,9 +58,8 @@ struct SelectStopsView: View {
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
                 nav: {
-                    vm.startTrip(context: context)
-                    tripVeiewModel.startTrip()
-                    path.append("CurrentTrip")
+                    vm.startTrip(context: context) //save in histor and in shared data
+                    path.append("TripRecap")
                 },
                 stops: vm.selectedStops,
                 onDelete: { vm.remove($0) }
@@ -73,8 +70,8 @@ struct SelectStopsView: View {
         .ignoresSafeArea(edges: .bottom)
     }
 }
-
-#Preview {
-    @Previewable @State var path = NavigationPath()
-    SelectStopsView(path: $path)
-}
+//
+//#Preview {
+//    @Previewable @State var path = NavigationPath()
+//    SelectStopsView(path: $path)
+//}

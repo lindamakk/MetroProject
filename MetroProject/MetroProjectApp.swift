@@ -47,6 +47,9 @@ struct MetroProjectApp: App {
                          if value == "SelectStops" {
                             SelectStopsView(path: $path)
                         }
+                    else if value == "TripRecap" {
+                        TripRecapView(path: $path)
+                    }
                     else if value == "CurrentTrip" {
                         CurrentTripView(path: $path)
                     }
