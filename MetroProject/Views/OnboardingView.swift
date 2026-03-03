@@ -2,54 +2,93 @@
 //  OnboardingView.swift
 //  MetroProject
 //
-//  Created by Dana on 12/09/1447 AH.
-//
 
 import SwiftUI
 import CoreLocation
 
 struct OnboardingView: View {
     @Binding var hasSeenOnboarding: Bool
+    @State private var currentPage = 0
     
     private let locationManager = CLLocationManager()
     
     var body: some View {
-        VStack(spacing: 30) {
+        VStack {
             
-            Spacer()
-            
-            Image(systemName: "location.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .foregroundStyle(Color("GreenPrimaryColor"))
-            
-            Text("Never Miss Your Stops")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
-            
-            Text("To wake you up when you arrive at your station, Stoply needs to track your location.")
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-            
-
-                Text("Please select 'Always Allow' on the settings")
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-            
-            Spacer()
-            
-            Button(action: {
-                // Ask for the permission once.
-                locationManager.requestAlwaysAuthorization()
+            TabView(selection: $currentPage) {
                 
-                // Dismiss this screen, only showed once to the user.
-                hasSeenOnboarding = true
+                // MARK: - Screen 1
+                OnboardingStepView(
+                    image: "figure.walk",
+                    title: "On your way to school or work?",
+                    subtitle: "Select the metro stops for your trip."
+                )
+                .tag(0)
+                
+                
+                // MARK: - Screen 2
+                OnboardingStepView(
+                    image: "moon.zzz.fill",
+                    title: "Relax and enjoy the ride.",
+                    subtitle: "Scroll, read, or even take a nap."
+                )
+                .tag(1)
+                
+                
+                // MARK: - Screen 3
+                OnboardingStepView(
+                    image: "bell.badge.fill",
+                    title: "We’ve got your stop.",
+                    subtitle: "We’ll remind you before you arrive — no more missed stations."
+                )
+                .tag(2)
+                
+                
+                // MARK: - Location Permission Screen
+                VStack(spacing: 16) {
+                    
+                    Spacer()
+                    
+                    Image(systemName: "location.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .foregroundStyle(Color("GreenPrimaryColor"))
+                    
+                    Text("Never Miss Your Stops")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("To remind you before your station, Stoply needs access to your location.")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 40)
+                    
+                    Text("Please choose “Always Allow” in the next step.")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                }
+                .tag(3)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            
+            
+            // MARK: - Bottom Button
+            Button(action: {
+                if currentPage < 3 {
+                    withAnimation {
+                        currentPage += 1
+                    }
+                } else {
+                    locationManager.requestAlwaysAuthorization()
+                    hasSeenOnboarding = true
+                }
             }) {
-                Text("Continue")
+                Text(currentPage == 3 ? "Get Started" : "Continue")
                     .font(.headline)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
@@ -58,11 +97,44 @@ struct OnboardingView: View {
                     .cornerRadius(15)
             }
             .padding(.horizontal, 40)
-            .padding(.bottom, 50)
+            .padding(.bottom, 40)
         }
     }
 }
 
 #Preview {
     OnboardingView(hasSeenOnboarding: .constant(false))
+}
+
+struct OnboardingStepView: View {
+    
+    let image: String
+    let title: String
+    let subtitle: String
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            
+            Spacer()
+            
+            Image(systemName: image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .foregroundStyle(Color("GreenPrimaryColor"))
+            
+            Text(title)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            
+            Text(subtitle)
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+           
+            
+            Spacer()
+        }     .padding(.horizontal, 40)
+    }
 }

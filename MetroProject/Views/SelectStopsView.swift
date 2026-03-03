@@ -25,8 +25,26 @@ struct SelectStopsView: View {
     private var metroLines: [MetroLine]
 
     var body: some View {
-        VStack {
+        VStack{
+            
             ScrollView {
+                VStack(alignment: .leading, spacing: 16) {   VStack(alignment: .leading, ) {
+                    Text("Choose your stops")
+                        .font(.system(size: 28, weight: .semibold))
+                    
+                    Text("Select stops to receive notifications.")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 16))
+                    
+                }
+                
+
+            
+                    TipView(ChooseStopsTip())
+//                        .tint(Color("GreenPrimaryColor"))
+
+
+    
                 VStack(spacing: 16) {
                     ForEach(metroLines, id: \.code) { line in
                         MetroLineDropDown(
@@ -36,8 +54,8 @@ struct SelectStopsView: View {
                         )
                     }
                 }
-                .padding()
-            }
+
+            } .padding()  } 
 
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
