@@ -5,7 +5,7 @@
 //  Created by Linda on 02/02/2026.
 //
 import SwiftUI
-
+import TipKit
 
 
 struct TripButtomSheet: View {
@@ -13,10 +13,16 @@ struct TripButtomSheet: View {
     var nav: () -> Void
     let stops: [MetroStation]
     let onDelete: (MetroStation) -> Void
+    let deleteStationTip: DeleteStationTip
     var body: some View {
-       
-            
-            VStack(alignment: .leading, spacing: 4) {
+        
+        
+        VStack(alignment: .leading, spacing: 4) {
+            if !stops.isEmpty {
+                TipView(deleteStationTip, arrowEdge: .top)
+                    .tint(Color("GreenPrimaryColor"))
+                    .padding(.horizontal)
+            }
                 SelectedStopCard(
                     stops: stops,
                     onDelete: onDelete
@@ -28,14 +34,15 @@ struct TripButtomSheet: View {
                     print("Started")
                 }
             }
-            .padding(.bottom, 40)  // ✅ Space for safe area
+                .padding(.bottom, 40)  // ✅ Space for safe area
             //.background(Color.white)
-            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))  // ✅ iOS 16+
-            .overlay(
-                UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20)
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 2)
-            )
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))  // ✅ iOS 16+
+                .overlay(
+                    UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20)
+                        .stroke(Color.gray.opacity(0.2), lineWidth: 2)
+                )
             //.shadow(radius: 4)
-
+            
+        }
     }
-}
+

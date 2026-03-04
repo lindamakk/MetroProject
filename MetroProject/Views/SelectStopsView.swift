@@ -18,7 +18,7 @@ struct SelectStopsView: View {
     @Environment(\.modelContext) private var modelContext
     
     let locationTip = LocationPermissionTip()
-
+    let deleteStationTip = DeleteStationTip()
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
 
@@ -62,8 +62,13 @@ struct SelectStopsView: View {
                     path.append("TripRecap")
                 },
                 stops: vm.selectedStops,
-                onDelete: { vm.remove($0) }
-            )
+                onDelete: { station in  // 
+                                    vm.remove(station)
+                                    deleteStationTip.invalidate(reason: .actionPerformed)
+                                },
+                                deleteStationTip: deleteStationTip
+                            )
+            
             .popoverTip(locationTip, arrowEdge: .bottom)
             
         }
