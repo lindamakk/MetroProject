@@ -1,8 +1,3 @@
-//
-//  OnboardingView.swift
-//  MetroProject
-//
-
 import SwiftUI
 import CoreLocation
 
@@ -14,10 +9,9 @@ struct OnboardingView: View {
     
     var body: some View {
         VStack {
-            
             TabView(selection: $currentPage) {
                 
-                // MARK: - Screen 1
+                // Screen 1
                 OnboardingStepView(
                     image: "figure.walk",
                     title: "On your way to school or work?",
@@ -25,8 +19,7 @@ struct OnboardingView: View {
                 )
                 .tag(0)
                 
-                
-                // MARK: - Screen 2
+                // Screen 2
                 OnboardingStepView(
                     image: "moon.zzz.fill",
                     title: "Relax and enjoy the ride.",
@@ -34,8 +27,7 @@ struct OnboardingView: View {
                 )
                 .tag(1)
                 
-                
-                // MARK: - Screen 3
+                // Screen 3
                 OnboardingStepView(
                     image: "bell.badge.fill",
                     title: "We’ve got your stop.",
@@ -43,12 +35,9 @@ struct OnboardingView: View {
                 )
                 .tag(2)
                 
-                
-                // MARK: - Location Permission Screen
+                // Location Permission Screen
                 VStack(spacing: 16) {
-                    
                     Spacer()
-                    
                     Image(systemName: "location.circle.fill")
                         .resizable()
                         .scaledToFit()
@@ -76,8 +65,6 @@ struct OnboardingView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             
-            
-            // MARK: - Bottom Button
             Button(action: {
                 if currentPage < 3 {
                     withAnimation {
@@ -102,21 +89,15 @@ struct OnboardingView: View {
     }
 }
 
-#Preview {
-    OnboardingView(hasSeenOnboarding: .constant(false))
-}
-
+// التعديل السحري هنا عشان Xcode يلقط النصوص
 struct OnboardingStepView: View {
-    
     let image: String
-    let title: String
-    let subtitle: String
+    let title: LocalizedStringKey // غيرنا النوع هنا
+    let subtitle: LocalizedStringKey // وغيرنا النوع هنا
     
     var body: some View {
         VStack(spacing: 16) {
-            
             Spacer()
-            
             Image(systemName: image)
                 .resizable()
                 .scaledToFit()
@@ -132,9 +113,9 @@ struct OnboardingStepView: View {
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-           
             
             Spacer()
-        }     .padding(.horizontal, 40)
+        }
+        .padding(.horizontal, 40)
     }
 }

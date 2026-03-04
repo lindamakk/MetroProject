@@ -1,10 +1,9 @@
-
 import SwiftUI
 
 struct TripRecapView: View {
     @Binding var path: NavigationPath
     @ObservedObject private var shared = SharedData.shared
-    @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
+    @StateObject private var tripVeiewModel = CurrentTripViewModel()
     
     var body: some View {
         NavigationView {
@@ -20,17 +19,19 @@ struct TripRecapView: View {
                 } else {
                     List {
                         ForEach(Array(shared.items.enumerated()), id: \.element.id) { index, station in
-
                             HStack(spacing: 12) {
                                 Circle()
                                     .fill(getMetroColor(lineColor: station.lineName))
                                     .frame(width: 12, height: 12)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(station.nameEn)
+                                    // اسم المحطة بالعربي (من الـ Extension الخاص بك)
+                                    Text(station.displayName)
                                         .font(.headline)
                                     
-                                    Text(station.lineName)
+                                    // اسم المسار بالعربي (من الـ Extension الخاص بالـ MetroLine)
+                                    // نستخدم التغليف الآمن لأن الـ line اختياري
+                                    Text(station.line?.displayName ?? station.lineName)
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
@@ -44,16 +45,13 @@ struct TripRecapView: View {
                             .padding(.vertical, 6)
                         }
                     }
-                    .listStyle(.plain)
+                    .listStyle(.plain) // الآن في مكانها الصحيح بعد القوس الخاص بالـ List
                 }
                 
-                ActionButton(
-                    label: "Start Trip") {
-                        
-                        tripVeiewModel.startTrip() //start monitor route and send notification
-                           path.append("CurrentTrip")
-                       
-
+                // زر ابدأ الرحلة
+                ActionButton(label: "Start Trip") {
+                    tripVeiewModel.startTrip()
+                    path.append("CurrentTrip")
                 }
             }
             .navigationTitle("Your Trip Recap")
@@ -61,4 +59,3 @@ struct TripRecapView: View {
         }
     }
 }
-

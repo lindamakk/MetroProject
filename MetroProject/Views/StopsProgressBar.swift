@@ -22,7 +22,7 @@ struct StopsProgressBar: View {
             HStack(alignment: .top, spacing: 0) {
                 ForEach(Array(stations.enumerated()), id: \.element.id) { index, station in
                     StopNode(
-                        name: station.nameEn,
+                        name: station.displayName,
                         isPassed: viewModel.mapIsPassed[station] ?? false,
                         isNext: index == viewModel.currentStationIndex
                     )

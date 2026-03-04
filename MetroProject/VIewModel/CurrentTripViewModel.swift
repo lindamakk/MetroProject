@@ -70,7 +70,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         print("🟢 ViewModel initialized")
         print("🟢 Total stations: \(sharedData.items.count)")
         for (index, station) in sharedData.items.enumerated() {
-            print("   Station \(index): \(station.nameEn) at (\(station.lat), \(station.lon))")
+            print("   Station \(index): \(station.displayName) at (\(station.lat), \(station.lon))")
         }
     }
     
@@ -171,7 +171,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         }
         
         let station = sharedData.items[currentStationIndex]
-        print("🎯 Target Station [\(currentStationIndex)]: \(station.nameEn)")
+        print("🎯 Target Station [\(currentStationIndex)]: \(station.displayName)")
         print("   📍 Station Location: (\(station.lat), \(station.lon))")
         
         let distanceToNextStation = calculateDistanceToNextStation(from: userLocation)
@@ -208,7 +208,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         print("   Distance: \(String(format: "%.2f", distance))m")
         
         let station = sharedData.items[currentStationIndex]
-        print("   Station: \(station.nameEn)")
+        print("   Station: \(station.displayName)")
         
         markStationAsPassed(station)
         notifyUser(for: station)
@@ -220,7 +220,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         DispatchQueue.main.async {
             self.mapIsPassed[station] = true // 👈
         }
-        print("✅ Marked station as PASSED: \(station.nameEn)")
+        print("✅ Marked station as PASSED: \(station.displayName)")
     }
     private func moveToNextStation() {
         let previousIndex = currentStationIndex
@@ -234,7 +234,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
                 print("🏁 This was the final station!")
                 self.hasReachedDestination = true
             } else {
-                print("🎯 Next target: \(self.sharedData.items[self.currentStationIndex].nameEn)")
+                print("🎯 Next target: \(self.sharedData.items[self.currentStationIndex].displayName)")
             }
         }
     }
@@ -254,7 +254,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     
     // MARK: - Notifications
     private func notifyUser(for station: MetroStation) {
-        print("\n🔔 SENDING NOTIFICATION for: \(station.nameEn)")
+        print("\n🔔 SENDING NOTIFICATION for: \(station.displayName)")
         
         let content = createNotificationContent(for: station)
         let request = UNNotificationRequest(
@@ -269,7 +269,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     private func createNotificationContent(for station: MetroStation) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "تنبيه محطة"
-        content.body = "اقتربت من محطة \(station.nameEn)"
+        content.body = "اقتربت من محطة \(station.displayName)"
         content.sound = .default
         return content
     }
@@ -299,7 +299,7 @@ class CurrentTripViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         
         let content = UNMutableNotificationContent()
         content.title = "🚇 بدأت الرحلة"
-        content.body = "نتتبع موقعك الآن. المحطة التالية: \(firstStation.nameEn)"
+        content.body = "نتتبع موقعك الآن. المحطة التالية: \(firstStation.displayName)"
         content.sound = .default
         content.badge = 1
         

@@ -14,6 +14,7 @@ struct JSONStation: Codable {
     let metrostationnamear: String
     let metroline: String
     let metrolinename: String
+    let metrolinenamear: String?
     let stationseq: Int
     let mstationtypename: String
     let geo_point_2d: JSONGeo

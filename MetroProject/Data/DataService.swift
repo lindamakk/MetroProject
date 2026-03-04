@@ -46,7 +46,12 @@ class DataService {
                     line = existingLine
                 } else {
                     // If the dictionary does not include the line, create it.
-                    let newLine = MetroLine(code: raw.metroline, nameEn: raw.metrolinename)
+                    let newLine = MetroLine(
+//                        code: raw.metroline, nameEn: raw.metrolinename)
+                        code: raw.metroline,
+                                    nameEn: raw.metrolinename,
+                                    nameAr: raw.metrolinenamear ?? raw.metrolinename // إذا ما لقي عربي استخدم الإنجليزي
+                                )
                     // Save to DB.
                     context.insert(newLine)
                     // Add line to cache for future checks.

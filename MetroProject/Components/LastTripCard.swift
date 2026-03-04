@@ -21,11 +21,12 @@ struct LastTripCard: View {
         }) {
             HStack(spacing: 12) {
                 RoundedRectangle(cornerRadius: 3.5, style: .continuous)
-                    .fill(getMetroColor(lineColor: history.routeStations.last!.line!.nameEn))
-                    .frame(width: 7, height: 45)
+                // السطر المعدل:
+                .fill(getMetroColor(lineColor: history.routeStations.last?.line?.nameEn ?? "Gray"))
+                .frame(width: 7, height: 45)
                     .accessibilityHidden(true)
 
-                Text(history.routeStations.last!.nameEn)
+                Text(history.routeStations.last!.displayName)
                     .font(.system(size: 16, weight: .regular))
                     // 💡 التعديل الأول: جعل النص يتكيف تلقائياً
                     .foregroundColor(.primary)

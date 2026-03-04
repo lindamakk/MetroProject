@@ -1,83 +1,59 @@
-//
-//  CurrentTripView.swift
-//  MetroProject
-//
-//  Created by Linda on 02/02/2026.
-//
-
 import SwiftUI
+
 struct CurrentTripView: View {
     @Binding var path: NavigationPath
     @StateObject var viewModel = CurrentTripViewModel()
     @State private var showEndTripAlert = false
     
-    
     var body: some View {
         VStack(spacing: 24) {
             Spacer().frame(height: 40)
-            // Pass the destination from ViewModel
+            
+            // الوجهة القادمة
             FinalDestinationGroup(
                 userDestination: userDestination(
                     stationName: viewModel.nextStationName,
-                    lineName: viewModel.nextStationLine,
-                    // You might want to add line tracking to ViewModel
+                    lineName: viewModel.nextStationLine
                 )
             )
             
-            // Pass remaining stations count from ViewModel
+            // كرت الرحلة (تلقائياً سيتعرف على "Trip in progress" و "Stops Left" إذا كانت داخل الكرت)
             TripCardView(
                 stopsLeft: viewModel.stationsRemaining,
                 status: .inProgress
             )
+            
             Spacer()
+            
             StopsProgressBar(viewModel: viewModel)
-
-
             
             Spacer()
             
-            //end trip button
-            ActionButton(
-                label: "End Trip") {
-                print("End Trip")
+            // زر إنهاء الرحلة
+        
+                ActionButton(label: "End Trip") {
                     showEndTripAlert = true
-                    //add alert before
-                       path.append("TripEnded")
-                   
-
-            }//button
+                }
             
-        }//v
-        //.padding()
-        //.frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(Color(red: 253/255, green: 254/255, blue: 255/255))
-        //.ignoresSafeArea()
+        }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("BackgroundColor").ignoresSafeArea())
-        // TODO: we need to change alert to
-        .alert("End Trip?", isPresented: $showEndTripAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("End Trip", role: .destructive) {
-                viewModel.stopTrip() // Call the ViewModel method
+        
+        // التنبيه (Alert) - هنا التعديل المهم للترجمة
+        .alert(String(localized: "End Trip?"), isPresented: $showEndTripAlert) {
+            Button(String(localized: "Cancel"), role: .cancel) { }
+            Button(String(localized: "End Trip"), role: .destructive) {
+                viewModel.stopTrip()
                 path.append("TripEnded")
             }
         } message: {
             Text("Are you sure you want to end your trip?")
         }
         .onDisappear {
-            // Cleanup when view disappears
             if viewModel.isTrackingActive {
                 viewModel.stopTrip()
             }
         }
-        
-        
-        
-        
-    }//body
-}//struct
-#Preview {
-    @Previewable @State var path = NavigationPath()
-    CurrentTripView(path: $path)
+    }
 }

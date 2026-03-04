@@ -14,7 +14,7 @@ struct SelectedStopCard: View {
                         Button {
                             onDelete(station)
                         } label: {
-                            Text(station.nameEn)
+                            Text(station.displayName)
                                 .foregroundColor(.primary)
                                 .frame(width: 120, height: 48)
                                 .background(Color("GrayColorCard"))
@@ -22,8 +22,8 @@ struct SelectedStopCard: View {
                         }
 
                         Rectangle()
-                            .foregroundColor(getMetroColor(lineColor: station.line?.nameEn ?? "Gray"))
-                            .frame(width: 4, height: 28)
+                        // نمرر nameEn بدلاً من displayName لأن الدالة مبرمجة على الأسماء الإنجليزية
+                        .foregroundColor(getMetroColor(lineColor: station.line?.nameEn ?? "Gray"))                            .frame(width: 4, height: 28)
                             .cornerRadius(16)
                             .offset(x: 8)
                     }

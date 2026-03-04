@@ -20,7 +20,7 @@ enum IconPosition {
 // MARK: - button we will call to use
 
 struct ActionButton: View {
-    var label: String
+    var label: LocalizedStringKey
     var icon: String? = nil // SF Symbol name, nil = no icon
     var iconPosition: IconPosition = .leading // where to put the icon
     var state: ActionButtonState = .active //defult active
