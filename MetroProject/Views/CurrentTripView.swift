@@ -6,56 +6,73 @@
 //
 
 import SwiftUI
-
 struct CurrentTripView: View {
     @Binding var path: NavigationPath
     @StateObject var viewModel = CurrentTripViewModel()
     @State private var showEndTripAlert = false
     
+    
     var body: some View {
-        VStack(spacing: 60) {
+        VStack(spacing: 24) {
             Spacer().frame(height: 40)
-            
+            // Pass the destination from ViewModel
             FinalDestinationGroup(
                 userDestination: userDestination(
                     stationName: viewModel.nextStationName,
-                    lineName: viewModel.nextStationLine
+                    lineName: viewModel.nextStationLine,
+                    // You might want to add line tracking to ViewModel
                 )
             )
             
+            // Pass remaining stations count from ViewModel
             TripCardView(
                 stopsLeft: viewModel.stationsRemaining,
                 status: .inProgress
             )
+            Spacer()
+            StopsProgressBar(viewModel: viewModel)
+
+
             
             Spacer()
             
+            //end trip button
             ActionButton(
                 label: "End Trip") {
+                print("End Trip")
                     showEndTripAlert = true
-                }
+                    //add alert before
+                       path.append("TripEnded")
+                   
+
+            }//button
             
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        // --- التعديل هنا ليدعم الدارك مود ---
-        .background(Color("BackgroundColor").ignoresSafeArea())
-        // ----------------------------------
+        }//v
+        //.padding()
+        //.frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 253/255, green: 254/255, blue: 255/255))
+        //.ignoresSafeArea()
+        // TODO: we need to change alert to
         .alert("End Trip?", isPresented: $showEndTripAlert) {
             Button("Cancel", role: .cancel) { }
             Button("End Trip", role: .destructive) {
-                viewModel.stopTrip()
+                viewModel.stopTrip() // Call the ViewModel method
                 path.append("TripEnded")
             }
         } message: {
             Text("Are you sure you want to end your trip?")
         }
         .onDisappear {
+            // Cleanup when view disappears
             if viewModel.isTrackingActive {
                 viewModel.stopTrip()
             }
         }
-    }
+        
+        
+        
+        
+    }//body
 }//struct
 #Preview {
     @Previewable @State var path = NavigationPath()
