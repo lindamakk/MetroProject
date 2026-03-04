@@ -6,18 +6,18 @@ import Foundation
 class SelectedStopViewModel: ObservableObject {
     @Published var selectedStops: [MetroStation] = []
     //@StateObject  private  var tripVeiewModel = CurrentTripViewModel()
-
+    
     private let sharedData = SharedData.shared
     
     func reset() {
-            self.selectedStops = []
-        }
+        self.selectedStops = []
+    }
     
     func loadTrip(_ stations: [MetroStation]) {
-//            self.selectedStops = stations
+        //            self.selectedStops = stations
         // for the UI to use, independent of the History object.
-            self.selectedStops = Array(stations)
-        }
+        self.selectedStops = Array(stations)
+    }
     
     // Toggle selection: add/remove station
     func toggle(_ station: MetroStation) {
@@ -38,10 +38,13 @@ class SelectedStopViewModel: ObservableObject {
     
     func startTrip(context: ModelContext) {
         // save route in history
-//        let stationsToSave = Array(selectedStops) // Copy the current selection
+        //        let stationsToSave = Array(selectedStops) // Copy the current selection
         DataService.addToHistory(context: context, history: selectedStops)
         
         // pass the stops list to SharedData if neede
         sharedData.items = selectedStops
         //vmc.startTrip()
-    }}
+    }
+    
+    
+}

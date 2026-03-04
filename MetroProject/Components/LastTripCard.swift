@@ -21,12 +21,14 @@ struct LastTripCard: View {
         }) {
             HStack(spacing: 12) {
                 RoundedRectangle(cornerRadius: 3.5, style: .continuous)
-                    .fill(getMetroColor (lineColor: history.routeStations.last!.line!.nameEn))
+                    .fill(getMetroColor(lineColor: history.routeStations.last!.line!.nameEn))
                     .frame(width: 7, height: 45)
                     .accessibilityHidden(true)
 
                 Text(history.routeStations.last!.nameEn)
-                    .font(.system(size: 16, weight: .regular, design: .default)) // SF Pro Text 16
+                    .font(.system(size: 16, weight: .regular))
+                    // 💡 التعديل الأول: جعل النص يتكيف تلقائياً
+                    .foregroundColor(.primary)
                     .lineLimit(1)
                     .truncationMode(.tail)
 
@@ -36,12 +38,12 @@ struct LastTripCard: View {
             .frame(maxWidth: .infinity, minHeight: 68, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color.white)
-                    .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
+                    .fill(Color("MainCardColor"))
+                    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 4)
             )
         }
-        .buttonStyle(.plain) // يحافظ على الشكل بدون تأثيرات زر افتراضية
-        .contentShape(RoundedRectangle(cornerRadius: 12)) // يضمن أن كل مساحة الكرت قابلة للضغط
+        .buttonStyle(.plain)
+        .contentShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 

@@ -7,26 +7,42 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 struct SelectStopsView: View {
-    @StateObject  private  var tripVeiewModel = CurrentTripViewModel()
+
     @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
     @EnvironmentObject var vm: SelectedStopViewModel
     
-   // @EnvironmentObject var vmc: CurrentTripViewModel
-//        @StateObject private var vm = SelectedStopViewModel()
     @Environment(\.modelContext) private var modelContext
     
-    
-
+    let locationTip = LocationPermissionTip()
 
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
 
     var body: some View {
-        VStack {
+        VStack{
+            
             ScrollView {
+                VStack(alignment: .leading, spacing: 16) {   VStack(alignment: .leading, ) {
+                    Text("Choose your stops")
+                        .font(.system(size: 28, weight: .semibold))
+                    
+                    Text("Select stops to receive notifications.")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 16))
+                    
+                }
+                
+
+            
+                    TipView(ChooseStopsTip())
+//                        .tint(Color("GreenPrimaryColor"))
+
+
+    
                 VStack(spacing: 16) {
                     ForEach(metroLines, id: \.code) { line in
                         MetroLineDropDown(
@@ -36,29 +52,25 @@ struct SelectStopsView: View {
                         )
                     }
                 }
-                .padding()
-            }
+
+            } .padding()  } 
 
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
-                
                 nav: {
-                    
-                    vm.startTrip(context: context)
-                    tripVeiewModel.startTrip()
-                    path.append("CurrentTrip")
-                    
+                    vm.startTrip(context: context) //save in histor and in shared data
+                    path.append("TripRecap")
                 },
                 stops: vm.selectedStops,
                 onDelete: { vm.remove($0) }
-               
             )
+            .popoverTip(locationTip, arrowEdge: .bottom)
+            
         }
-        .ignoresSafeArea(edges: .bottom)
-    }
+        .background(Color("BackgroundColor").ignoresSafeArea())    }
 }
-
-#Preview {
-    @Previewable @State var path = NavigationPath()
-    SelectStopsView(path: $path)
-}
+//
+//#Preview {
+//    @Previewable @State var path = NavigationPath()
+//    SelectStopsView(path: $path)
+//}

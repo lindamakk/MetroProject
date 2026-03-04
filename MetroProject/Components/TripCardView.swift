@@ -20,9 +20,9 @@ struct TripCardView: View {
         VStack(spacing: 15) {
             Text("\(stopsLeft)")
                 .font(.system(size: 60, weight: .medium))
+                // النص الأخضر يفضل يبقى كما هو أو نستخدم لون من الـ Assets لو حابة
                 .foregroundColor(Color(red: 56/255, green: 102/255, blue: 65/255))
             
-        
             Text("Stops Left")
                 .font(.system(size: 16))
                 .foregroundColor(Color(red: 56/255, green: 102/255, blue: 65/255))
@@ -35,13 +35,14 @@ struct TripCardView: View {
                 .frame(height: 3)
             
             // البروقرس
-            TripProgressIndicator()
+//            TripProgressIndicator()
         }
         .frame(width: 353, height: 300)
-        .background(Color.white)
+        // --- التعديل هنا ليدعم الدارك مود ---
+        .background(Color("MainCardColor")) // غيرنا الأبيض للون الكارد الذكي
         .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 20)
-    }
+        // في الدارك مود، الظل يفضل يكون أخف أو نلغيه، هنا قللنا الـ opacity جداً
+        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)    }
 }
 
 // MARK: Badge للحالة
@@ -52,6 +53,7 @@ struct TripStatusBadge: View {
         HStack(spacing: 8) {
             Text(status == .inProgress ? "Trip in progress" : "Trip interrupted")
                 .font(.system(size: 12, weight: .medium))
+                // جعلنا النص أبيض دائماً داخل الـ Capsule الملون لضمان الوضوح
                 .foregroundColor(.white)
             
             Image(systemName: status == .inProgress ? "location.fill" : "location.slash.fill")
@@ -62,14 +64,11 @@ struct TripStatusBadge: View {
         .padding(.vertical, 12)
         .background(
             Capsule()
-                .fill(status == .inProgress ? Color(red: 106/255, green: 153/255, blue: 78/255) : Color(red:  233/255, green: 21/255, blue: 45/255))
-                .frame(width: 136, height: 34)
+                .fill(status == .inProgress ? Color(red: 106/255, green: 153/255, blue: 78/255) : Color(red: 233/255, green: 21/255, blue: 45/255))
+                // حذفنا الـ frame الثابت هنا عشان الـ padding يتنفس والـ Capsule يضبط حجمه تلقائياً
         )
     }
 }
-
-
-
 // MARK: - Preview
 struct TripCardView_Previews: PreviewProvider {
     static var previews: some View {

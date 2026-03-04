@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 @main
 struct MetroProjectApp: App {
@@ -14,6 +15,8 @@ struct MetroProjectApp: App {
     @State var path = NavigationPath()
 //    @EnvironmentObject var vm: SelectedStopViewModel
     @StateObject private var vm = SelectedStopViewModel()
+    // Check if onboarding is complete
+    @AppStorage("hasSeenOnboarding") var hasSeenOnboarding: Bool = false
     // CREATED ONCE
     let container: ModelContainer
     
@@ -25,6 +28,7 @@ struct MetroProjectApp: App {
             } catch {
                 fatalError("Failed to create ModelContainer: \(error)")
             }
+            try? Tips.configure()
         }
 
     var body: some Scene {
@@ -43,6 +47,9 @@ struct MetroProjectApp: App {
                          if value == "SelectStops" {
                             SelectStopsView(path: $path)
                         }
+                    else if value == "TripRecap" {
+                        TripRecapView(path: $path)
+                    }
                     else if value == "CurrentTrip" {
                         CurrentTripView(path: $path)
                     }
@@ -59,6 +66,14 @@ struct MetroProjectApp: App {
             .onAppear {
                         DataService.seedData(context: container.mainContext)
                     }
+            
+            // 4. Attach the Onboarding screen as a Full Screen Cover
+                        .fullScreenCover(isPresented: Binding(
+                            get: { !hasSeenOnboarding },
+                            set: { _ in }
+                        )) {
+                            OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
+                        }
         }
     }
 }

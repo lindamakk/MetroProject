@@ -42,7 +42,7 @@ struct HomeView: View {
 //                .cornerRadius(10)
             }
             .padding(.horizontal, 16)
-            .padding(.top, 24) // ← move it here
+            .padding(.top, 24) 
 
             
             HStack {
