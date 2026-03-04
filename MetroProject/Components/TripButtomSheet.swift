@@ -5,18 +5,23 @@
 //  Created by Linda on 02/02/2026.
 //
 import SwiftUI
-
-
+import TipKit
 
 struct TripButtomSheet: View {
     var listIsEmpty: Bool = true
     var nav: () -> Void
     let stops: [MetroStation]
     let onDelete: (MetroStation) -> Void
+    let deleteStationTip: DeleteStationTip
     var body: some View {
        
             
             VStack(alignment: .leading, spacing: 4) {
+                if !stops.isEmpty {
+                                TipView(deleteStationTip, arrowEdge: .top)
+                                    .tint(Color("GreenPrimaryColor"))
+                                    .padding(.horizontal)
+                            }
                 SelectedStopCard(
                     stops: stops,
                     onDelete: onDelete
