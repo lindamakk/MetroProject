@@ -67,8 +67,7 @@ struct SelectStopsView: View {
             .popoverTip(locationTip, arrowEdge: .bottom)
             
         }
-        .ignoresSafeArea(edges: .bottom)
-    }
+        .background(Color("BackgroundColor").ignoresSafeArea())    }
 }
 //
 //#Preview {

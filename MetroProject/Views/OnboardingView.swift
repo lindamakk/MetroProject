@@ -90,7 +90,7 @@ struct OnboardingView: View {
             }) {
                 Text(currentPage == 3 ? "Get Started" : "Continue")
                     .font(.headline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color("GreenPrimaryColor"))
