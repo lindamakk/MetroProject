@@ -35,7 +35,7 @@ struct TripCardView: View {
                 .frame(height: 3)
             
             // البروقرس
-            TripProgressIndicator()
+//            TripProgressIndicator()
         }
         .frame(width: 353, height: 300)
         // --- التعديل هنا ليدعم الدارك مود ---

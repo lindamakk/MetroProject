@@ -26,10 +26,10 @@ struct TripProgressIndicator: View {
                 
                 
             ZStack {
-                Circle()
-                    .fill(Color(red: 56/255, green: 102/255, blue: 65/255))
-                    .frame(width: 24, height: 24)
-                    .opacity(0.7)
+//                Circle()
+//                    .fill(Color(red: 56/255, green: 102/255, blue: 65/255))
+//                    .frame(width: 24, height: 24)
+//                    .opacity(0.7)
                 
               
                 
