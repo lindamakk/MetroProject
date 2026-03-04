@@ -36,7 +36,7 @@ struct LastTripCard: View {
             .frame(maxWidth: .infinity, minHeight: 68, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color.white)
+                    .fill( Color("BackgroundColor"))
                     .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
             )
         }

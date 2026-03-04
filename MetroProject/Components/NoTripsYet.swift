@@ -16,12 +16,12 @@ struct NoTripsYet: View {
 
                 Image(systemName: "tram.fill")
                     .font(.largeTitle)
-                    .foregroundColor(Color(red: 255/255, green: 253/255, blue: 248/255)) // FFFDF8
+                    .foregroundColor(    Color("BackgroundColor")) // FFFDF8
             }
 
             Text("No Trips Yet")
                 .font(.system(size: 14, weight: .regular, design: .default)) // SF Pro Text 14
-                .foregroundColor(Color(red: 124/255, green: 119/255, blue: 119/255)) // 7C7777
+               // 7C7777
         }
         .frame(maxWidth: .infinity, minHeight: 180)
     }

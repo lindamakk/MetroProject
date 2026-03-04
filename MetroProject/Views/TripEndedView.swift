@@ -24,7 +24,7 @@ struct TripEndedView: View {
             // text
             Text("You’ve reached your destination successfully")
                 .font(.system(size: 24, weight: .regular))
-                .foregroundColor(.black)
+//                .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .padding(.top, 40)
                 .padding(.bottom, 5)

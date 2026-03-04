@@ -30,7 +30,7 @@ struct MetroLineDropDown: View {
                 .zIndex(10)
             if state == .bottom && showDropdown { optionsView }
         }
-        .background(.white)
+//        .background(.white)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
@@ -55,7 +55,7 @@ private extension MetroLineDropDown {
                 .offset(x: showDropdown ? -15 : 0)
 
             Text(metroLine.nameEn)
-                .foregroundColor(.black)
+//                .foregroundColor(.black)
                 .offset(x: showDropdown ? -15 : 0)
             Spacer()
 

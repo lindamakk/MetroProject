@@ -38,7 +38,7 @@ struct TripCardView: View {
 //            TripProgressIndicator()
         }
         .frame(width: 353, height: 300)
-        .background(Color.white)
+        .background(    Color("BackgroundColor"))
         .cornerRadius(20)
         .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 20)
     }

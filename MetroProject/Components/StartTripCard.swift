@@ -10,10 +10,10 @@ import SwiftUI
 struct StartTripCard: View {
     var nav: () -> Void
     // Colors from spec
-    private let cardBackground = Color.white // #FFFFFF
-    private let green = Color(red: 0x38/255, green: 0x66/255, blue: 0x41/255) // #386641
-    private let subtitleGray = Color(red: 0x7C/255, green: 0x77/255, blue: 0x77/255) // #7C7777
-    private let titleColor = Color.black // #000000
+//    private let cardBackground = Color.white // #FFFFFF
+//    private let green = Color(red: 0x38/255, green: 0x66/255, blue: 0x41/255) // #386641
+//    private let subtitleGray = Color(red: 0x7C/255, green: 0x77/255, blue: 0x77/255) // #7C7777
+//    private let titleColor = Color.black // #000000
 
     // Action for the button
     var onAddStops: () -> Void = {}
@@ -23,7 +23,7 @@ struct StartTripCard: View {
             // Top icon circle
             ZStack {
                 RoundedRectangle(cornerRadius: 27, style: .continuous)
-                    .fill(green)
+                    .fill(Color("GreenPrimaryColor"))
                     .frame(width: 56, height: 54)
 
                 Image(systemName: "tram.fill" )
@@ -36,12 +36,12 @@ struct StartTripCard: View {
             // Title
             Text("Start Fresh")
                 .font(.system(size: 16, weight: .regular, design: .default))
-                .foregroundColor(titleColor)
+//                .foregroundColor(titleColor)
 
             // Subtitle
             Text("Choose your stops and build your trip")
                 .font(.system(size: 12, weight: .regular, design: .default))
-                .foregroundColor(subtitleGray)
+//                .foregroundColor(subtitleGray)
 
 
             // In-card button
@@ -60,7 +60,7 @@ struct StartTripCard: View {
         .frame( height: 229)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(cardBackground)
+                .fill( Color("BackgroundColor"))
                 .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
         )
         .multilineTextAlignment(.center)
