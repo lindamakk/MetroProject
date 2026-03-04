@@ -10,7 +10,7 @@ import SwiftData
 import TipKit
 
 struct SelectStopsView: View {
-    
+
     @Environment(\.modelContext) var context
     @Binding var path: NavigationPath
     @EnvironmentObject var vm: SelectedStopViewModel
@@ -18,10 +18,10 @@ struct SelectStopsView: View {
     @Environment(\.modelContext) private var modelContext
     
     let locationTip = LocationPermissionTip()
-    
+
     @Query(sort: \MetroLine.code)
     private var metroLines: [MetroLine]
-    
+
     var body: some View {
         VStack{
             
@@ -35,26 +35,26 @@ struct SelectStopsView: View {
                         .font(.system(size: 16))
                     
                 }
-                    
-                    
-                    
-                    TipView(ChooseStopsTip())
-                    //                        .tint(Color("GreenPrimaryColor"))
-                    
-                    
-                    
-                    VStack(spacing: 16) {
-                        ForEach(metroLines, id: \.code) { line in
-                            MetroLineDropDown(
-                                metroLine: line,
-                                selectedStations: vm.selectedStops,
-                                onSelectStation: { vm.toggle($0) }
-                            )
-                        }
-                    }
-                    
-                } .padding()  }
+                
+
             
+                    TipView(ChooseStopsTip())
+//                        .tint(Color("GreenPrimaryColor"))
+
+
+    
+                VStack(spacing: 16) {
+                    ForEach(metroLines, id: \.code) { line in
+                        MetroLineDropDown(
+                            metroLine: line,
+                            selectedStations: vm.selectedStops,
+                            onSelectStation: { vm.toggle($0) }
+                        )
+                    }
+                }
+
+            } .padding()  } 
+
             TripButtomSheet(
                 listIsEmpty: vm.selectedStops.isEmpty,
                 nav: {

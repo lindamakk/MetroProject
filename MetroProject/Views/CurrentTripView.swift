@@ -80,5 +80,4 @@ struct CurrentTripView: View {
 #Preview {
     @Previewable @State var path = NavigationPath()
     CurrentTripView(path: $path)
-    
 }

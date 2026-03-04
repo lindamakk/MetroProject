@@ -15,21 +15,18 @@ struct LastTripCard: View {
 
 //    var metroColor: Color = .red
 
- var body: some View {
+    var body: some View {
         Button(action: {
             nav()
         }) {
             HStack(spacing: 12) {
                 RoundedRectangle(cornerRadius: 3.5, style: .continuous)
-                    .fill(getMetroColor(lineColor: history.routeStations.last!.line!.nameEn))
+                    .fill(getMetroColor (lineColor: history.routeStations.last!.line!.nameEn))
                     .frame(width: 7, height: 45)
                     .accessibilityHidden(true)
 
-                
                 Text(history.routeStations.last!.nameEn)
-                    .font(.system(size: 16, weight: .regular))
-
-                    .foregroundColor(.primary)
+                    .font(.system(size: 16, weight: .regular, design: .default)) // SF Pro Text 16
                     .lineLimit(1)
                     .truncationMode(.tail)
 
@@ -39,14 +36,12 @@ struct LastTripCard: View {
             .frame(maxWidth: .infinity, minHeight: 68, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-
-                    .fill(Color("MainCardColor"))
-
-                    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 4)
+                    .fill(Color.white)
+                    .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
             )
         }
-        .buttonStyle(.plain)
-        .contentShape(RoundedRectangle(cornerRadius: 12))
+        .buttonStyle(.plain) // يحافظ على الشكل بدون تأثيرات زر افتراضية
+        .contentShape(RoundedRectangle(cornerRadius: 12)) // يضمن أن كل مساحة الكرت قابلة للضغط
     }
 }
 

@@ -15,7 +15,7 @@ struct SelectedStopCard: View {
                             onDelete(station)
                         } label: {
                             Text(station.nameEn)
-                                .foregroundColor(.primary)
+                                .foregroundColor(.black)
                                 .frame(width: 120, height: 48)
                                 .background(Color("GrayColorCard"))
                                 .cornerRadius(16)
