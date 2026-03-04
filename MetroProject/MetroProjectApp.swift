@@ -62,7 +62,7 @@ struct MetroProjectApp: App {
                         .environmentObject(vm)
             // Data - inject the db into the entire app.
             .modelContainer(container)
-            
+//            .preferredColorScheme(.light)
             .onAppear {
                         DataService.seedData(context: container.mainContext)
                     }
